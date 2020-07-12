@@ -1,16 +1,19 @@
-folder = 'file path here'
 import os
-pathiter = (os.path.join(root, filename)
-    for root, _, filenames in os.walk(folder)
-    for filename in filenames
-)
-for path in pathiter:
-    newname =  path.replace('%20', ' ')
-    newname1 =  path.replace('%27', ' ')
-    newname2 =  path.replace('%5', ' ')
-    if newname != path:
-        os.rename(path,newname)
-    if newname1 != path:
-        os.rename(path,newname1)
-    if newname2 != path:
-        os.rename(path,newname2)
+from dotenv import load_dotenv
+
+load_dotenv()
+FOLDER = os.getenv("FOLDER")
+
+def main():
+    # If more key phrases are needed add them to this list
+    key_phrases = ["%20", "%27", "%5"]
+    for (_root, _dirs, files) in os.walk(FOLDER):
+        for file in files:
+            if file.endswith(".pdf"):
+                for key in key_phrases:
+                    if key in file:
+                        os.rename(file, file.replace(key, "_"))
+                        print(file)
+
+if __name__ == "__main__":
+    main()
