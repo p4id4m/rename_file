@@ -18,11 +18,12 @@ for link in soup.select("a[href$='.pdf']"):
         f.write(requests.get(urljoin(url,link['href'])).content)
 
 folder = 'folder path for files to be renamed'
-import os
+
 pathiter = (os.path.join(root, filename)
     for root, _, filenames in os.walk(folder)
     for filename in filenames
 )
+
 for path in pathiter:
     newname =  path.replace('%20', ' ')
     newname1 =  path.replace('%27', ' ')
