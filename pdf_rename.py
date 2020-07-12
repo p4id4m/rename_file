@@ -1,4 +1,4 @@
-folder = 'C:/Users/p4ill/OneDrive/Documents/DnD'
+folder = 'file path here'
 import os
 pathiter = (os.path.join(root, filename)
     for root, _, filenames in os.walk(folder)
